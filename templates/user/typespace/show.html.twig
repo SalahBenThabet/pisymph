@@ -1,0 +1,26 @@
+{% extends 'headeradmin.html.twig' %}
+
+{% block title %}Typespace{% endblock %}
+
+{% block content %}
+    <h1>Typespace</h1>
+
+    <table = border="2" class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ typespace.id }}</td>
+            </tr>
+            <tr>
+                <th>Typeespace</th>
+                <td>{{ typespace.typeespace }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_typespace_index') }}">retour à la liste</a>
+
+    <a href="{{ path('app_typespace_edit', {'id': typespace.id}) }}">Modifier</a>
+
+    {{ include('typespace/_delete_form.html.twig') }}
+{% endblock %}

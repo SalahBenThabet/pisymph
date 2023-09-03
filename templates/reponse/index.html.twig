@@ -1,0 +1,44 @@
+{% extends 'headeruser.html.twig' %}
+
+{% block title %}Reponse index
+{% endblock %}
+
+{% block content %}
+	<h1>
+		Table des réclamations</h1>
+
+	<table border="2" class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Reclamation
+				</th>
+				<th>Titre</th>
+				<th>Reponse</th>
+				<th>
+					Date de réponse
+				</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			{% for reponse in reponses %}
+				<tr>
+					<td>{{ reponse.id }}</td>
+					<td>{{ reponse.idRec.description }}</td>
+					<td>{{ reponse.titre }}</td>
+					<td>{{ reponse.description }}</td>
+					<td>{{ reponse.DateReponse|date('d/m/Y H:i') }}</td>
+					<td>
+						<a href="{{ path('app_reponse_edit', {'id': reponse.id}) }}">modifier</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_reclamation_index') }}">
+		Retour aux reclamations</a>
+
+{% endblock %}

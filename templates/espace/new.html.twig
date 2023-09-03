@@ -1,0 +1,12 @@
+{% extends 'headeradmin.html.twig' %}
+
+{% block title %}Nouveau Espace
+{% endblock %}
+
+{% block content %}
+	<h1>Créer un nouveau Espace</h1>
+
+	{{ include('espace/_form.html.twig') }}
+
+	<a href="{{ path('app_espace_index') }}">retour à la liste</a>
+{% endblock %}

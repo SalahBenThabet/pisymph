@@ -1,0 +1,83 @@
+{% extends 'headeradmin.html.twig' %}
+
+{% block title %}Liste des Espaces x{% endblock %}
+
+{% block content %}
+    <h1>Liste des Espaces  </h1>
+    <!-- Afficher les messages -->
+					{% for message in app.flashes('notification') %}
+
+						<div class="alert alert-success alert-dismissible fade show">
+
+							{{ message }}
+
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+
+						</div>
+
+					{% endfor %}
+    
+    <div class="search-form">
+  <form method="post" action="{{ path('rechercheE') }}">
+    <div class="input-group">
+      <input type="text" name="search" placeholder="Recherche" class="form-control">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+      </span>
+    </div>
+  </form>
+</div>
+
+
+    <table  = border="2" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Capacite</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Etat</th>
+                <th>Type d'espace</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for espace in espaces %}
+            <tr>
+                <td>{{ espace.id }}</td>
+                <td>{{ espace.capacite }}</td>
+                <td>{{ espace.nom }}</td>
+                <td>{{ espace.adresse }}</td>
+                <td>{{ espace.etat }}</td>
+                <td>{{ espace.idType.typeespace }}</td>
+
+                <td>
+                    <a href="{{ path('app_espace_show', {'id': espace.id}) }}">Afficher</a>/
+                    <a href="{{ path('app_espace_edit', {'id': espace.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_espace_new') }}">Créer un nouveau</a>
+    <a href="{{ path('listpdf') }}"> Imprimer </a>
+  
+    {# <!-- Inclure jQuery et Bootstrap -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- Activer les fonctionnalités Bootstrap --> #}
+		<script>
+			// Activer les fonctionnalités Bootstrap
+var alertList = document.querySelectorAll('.alert')
+alertList.forEach(function (alert) {
+new bootstrap.Alert(alert)
+})
+		</script>
+{% endblock %}

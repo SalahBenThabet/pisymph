@@ -1,0 +1,46 @@
+{% extends 'headeruser.html.twig' %}
+
+{% block title %}Reclamation index
+{% endblock %}
+
+{% block content %}
+	<h1>Mes reclamations</h1>
+	{% if reclamations is not empty %}
+		<table border="2" class="table">
+			<thead>
+				<tr>
+					<th>Nom
+					</th>
+					<th>Categorie
+					</th>
+					<th>Description</th>
+					<th>Date d'envoi
+					</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for reclamation in reclamations %}
+					{% if reclamation.getIdUser() == app.session.get('user').getId() %}
+						<tr>
+							<td>{{ app.session.get('user').getFirstName() ~ " " ~ app.session.get('user').getLastName() }}</td>
+							<td>{{ reclamation.idCat.Categorie() }}</td>
+							<td>{{ reclamation.getDescription() }}</td>
+							<td>{{ reclamation.getDateEnvoi()|date('d/m/Y H:i') }}</td>
+							<td>
+								<a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">Modifier</a>
+							</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<h1>Aucune réclamation pour le moment.</h1>
+	{% endif %}
+	<a href="{{ path('app_reclamation_new') }}">Ajouter une reclamation
+	</a><br>
+	<a href="{{ path('app_reponse_index') }}">
+		Voir les reponses</a>
+
+{% endblock %}

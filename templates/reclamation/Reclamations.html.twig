@@ -1,0 +1,62 @@
+{% extends 'headeradmin.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block content %}
+    <h1>liste des reclamations</h1>
+  <!-- Afficher les messages -->
+					{% for message in app.flashes('notification') %}
+
+						<div class="alert alert-success alert-dismissible fade show">
+
+							{{ message }}
+
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+
+						</div>
+
+					{% endfor %}
+
+
+    {% if reclamations is empty %}
+        <h1>Aucune réclamation pour le moment.</h1>
+    {% else %}
+    <table  = border="2" class="table">
+        <thead>
+            <tr>
+                <th>Nom </th>
+                <th>Categorie </th>
+                <th>Description</th>
+                <th> Date d'envoi </th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ app.session.get('user').getFirstName() ~ " " ~ app.session.get('user').getLastName() }}</td>
+                <td>{{ reclamation.idCat.Categorie() }}</td> 
+                <td>{{ reclamation.description }}</td>
+                <td>{{ reclamation.DateEnvoi|date('d/m/Y H:i') }}</td> 
+               <td> <form method="post" action="{{ path('app_reponse_new') }}"> 
+            <input type="hidden" name="reclamation_id" value="{{ reclamation.id }}">
+            <button class="btn btn-primary btn-sm" type="submit"> Repondre  </button>
+            </form>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    {# <a href="{{ path('app_reclamation_new') }}">Ajouter une reclamation</a> #}
+    <script>
+		// Activer les fonctionnalités Bootstrap
+var alertList = document.querySelectorAll('.alert')
+alertList.forEach(function (alert) {
+new bootstrap.Alert(alert)
+})
+	</script>
+{% endblock %}

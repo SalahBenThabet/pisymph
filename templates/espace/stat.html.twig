@@ -1,0 +1,58 @@
+{% extends 'headeradmin.html.twig' %}
+
+{% block title %}Liste des Espaces x{% endblock %}
+
+{% block content %}
+    <h1>stat espace  </h1>
+    
+
+   
+    <center><canvas id="myChart"></canvas></center>
+
+<script>
+		var data = {
+labels: [
+'Disponible', 'NonDisponible'
+],
+datasets: [
+{
+data: [
+{{ Disponible }}, {{ NonDisponible }}
+],
+backgroundColor: [
+'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'
+],
+borderColor: [
+'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'
+],
+borderWidth: 1
+}
+]
+};
+
+var options = {
+responsive: false,
+maintainAspectRatio: true,
+};
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+type: 'pie',
+data: data,
+options: options
+});
+	</script>
+    {# <!-- Inclure jQuery et Bootstrap -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- Activer les fonctionnalités Bootstrap --> #}
+		<script>
+			// Activer les fonctionnalités Bootstrap
+var alertList = document.querySelectorAll('.alert')
+alertList.forEach(function (alert) {
+new bootstrap.Alert(alert)
+})
+		</script>
+   
+	
+{% endblock %}

@@ -1,0 +1,36 @@
+<html>
+  <center>  <h1>Liste des Espaces  </h1> </centre>
+
+    <table  = border="2" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Capacite</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Etat</th>
+                <th>Type d'espace</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        {% for espace in espace %}
+            <tr>
+                <td>{{ espace.id }}</td>
+                <td>{{ espace.capacite }}</td>
+                <td>{{ espace.nom }}</td>
+                <td>{{ espace.adresse }}</td>
+                <td>{{ espace.etat }}</td>
+                <td>{{ espace.idType.typeespace }}</td>
+
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </html>

@@ -1,0 +1,13 @@
+{% extends 'headeradmin.html.twig' %}
+
+{% block title %}Edit Typespace{% endblock %}
+
+{% block content %}
+    <h1>Edit Typespace</h1>
+
+    {{ include('typespace/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('app_typespace_index') }}">retour à la liste</a>
+
+    {{ include('typespace/_delete_form.html.twig') }}
+{% endblock %}

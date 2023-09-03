@@ -1,0 +1,72 @@
+{% extends 'headeradmin.html.twig' %}
+
+{% block title %}Liste des Typespaces{% endblock %}
+
+{% block content %}
+    <h1>Liste des Typespaces </h1>
+ <!-- Afficher les messages -->
+					{% for message in app.flashes('notification') %}
+
+						<div class="alert alert-success alert-dismissible fade show">
+
+							{{ message }}
+
+							<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+
+						</div>
+
+					{% endfor %}
+
+
+
+
+  <div class="search-form">
+  <form method="post" action="{{ path('recherchetypespace') }}">
+    <div class="input-group">
+      <input type="text" name="search" placeholder="Recherche" class="form-control">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+      </span>
+    </div>
+  </form>
+</div>
+
+
+    <table = border="2" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Typeespace</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        {% for typespace in typespaces %}
+            <tr>
+                <td>{{ typespace.id }}</td>
+                <td>{{ typespace.typeespace }}</td>
+                <td>
+                    <a href="{{ path('app_typespace_show', {'id': typespace.id}) }}">Afficher</a>/
+                    <a href="{{ path('app_typespace_edit', {'id': typespace.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_typespace_new') }}">Créer un nouveau</a>
+    {# <!-- Inclure jQuery et Bootstrap -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- Activer les fonctionnalités Bootstrap --> #}
+		<script>
+			// Activer les fonctionnalités Bootstrap
+var alertList = document.querySelectorAll('.alert')
+alertList.forEach(function (alert) {
+new bootstrap.Alert(alert)
+{% endblock %}

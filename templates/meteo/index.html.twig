@@ -1,0 +1,7 @@
+{% extends 'headeradmin.html.twig' %}
+{% block content %}
+<h1>Météo à Tunis</h1>
+<p>Température : {{ temperature }}°C</p>
+<p>Description : {{ description }}</p>
+<img src="https://openweathermap.org/img/wn/{{ icon }}.png" alt="Icone météo">
+{% endblock %}

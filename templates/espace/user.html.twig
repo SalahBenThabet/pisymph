@@ -1,0 +1,60 @@
+{% extends 'headeruser.html.twig' %}
+
+{% block title %}Espace {% endblock %}
+
+{% block content %}
+    <h1>Espace </h1>
+    
+ <div class="search-form">
+  <form method="post" action="{{ path('rechercheuser') }}">
+    <div class="input-group">
+      <input type="text" name="search" placeholder="Recherche" class="form-control">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary">Rechercher</button>
+      </span>
+    </div>
+  </form>
+</div>
+
+
+    <table  = border="2" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Capacite</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Etat</th>
+                <th>Type d'espace</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for espace in espaces %}
+                <tr>
+                    <td>{{ espace.id }}</td>
+                    <td>{{ espace.capacite }}</td>
+                    <td>{{ espace.nom }}</td>
+                    <td>{{ espace.adresse }}</td>
+                    <td>{{ espace.etat }}</td>
+                    <td>{{ espace.idType.typeespace }}</td>
+                    <td>
+                        {% if espace.etat == 'Non Disponible' %}
+    <form method="post" {#action="{{ path('participer') }}"#}> 
+        <input type="hidden" name="espace_id" value="{{ espace.id }}">
+        <button class="btn btn-primary btn-sm" type="submit">Participer</button>
+    </form>
+{% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+    
+{% endblock %}

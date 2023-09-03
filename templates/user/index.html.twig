@@ -1,0 +1,54 @@
+{% extends 'headeradmin.html.twig' %}
+
+{% block title %}User index
+{% endblock %}
+
+{% block content %}
+	<h1>User index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Email</th>
+				<th>Password</th>
+				<th>FirstName</th>
+				<th>LastName</th>
+				<th>Birthday</th>
+				<th>CIN</th>
+				<th>Sexe</th>
+				<th>Num_tel</th>
+				<th>IsVerified</th>
+				<th>Role</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.id }}</td>
+					<td>{{ user.email }}</td>
+					<td>***</td>
+					<td>{{ user.FirstName }}</td>
+					<td>{{ user.LastName }}</td>
+					<td>{{ user.Birthday ? user.Birthday|date('Y-m-d') : '' }}</td>
+					<td>{{ user.CIN }}</td>
+					<td>{{ user.sexe }}</td>
+					<td>{{ user.NumTel }}</td>
+					<td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+					<td>{{ user.role }}</td>
+					<td>
+						<a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+						<a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="13">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{# <a href="{{ path('app_user_new') }}">Create new</a> #}
+{% endblock %}

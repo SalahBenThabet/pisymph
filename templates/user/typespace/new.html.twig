@@ -1,0 +1,11 @@
+{% extends 'headeradmin.html.twig' %}
+
+{% block title %}New Typespace{% endblock %}
+
+{% block content %}
+    <h1>Create new Typespace</h1>
+
+    {{ include('typespace/_form.html.twig') }}
+
+    <a href="{{ path('app_typespace_index') }}">retour à la liste</a>
+{% endblock %}
